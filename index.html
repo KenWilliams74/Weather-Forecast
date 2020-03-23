@@ -4,23 +4,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather or Not</title>
 </head>
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        var title = "space+jam";
-        var queryURL = "https://www.api.openweathermap.org/data/2.5/forecast?q=" + {city name} + "&appid=41d425285579630f673c7040873758b5";
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Weather or Not</span>
+      </nav>
+
+    <div class="container input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter name of City" aria-label="Enter name of City"
+            aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+        </div>
+    </div>
+    <div class="container card" style="width: 100%;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col">
+            <div class="card" style="width: 100%;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <section class="card-text">
+                        <p class="tempResults"></p>
+                        <p class="windResults"></p>
+                        <p class="humidityResults"></p>
+                        <p class="uvResults"></p>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 100%;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 100%">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 100%">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        var title = "tucson";
+        var apikey = "&appid=328fc5d128b7cf0dfe738cf9372e58b1";
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + title + apikey;
+        var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon};
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            console.log(response.Runtime);
+
+
+
+            // Transfer content to HTML
+            $(".card-title").html("<h5>" + response.city.name + " Weather Details</h5>");
+            $(".tempResults").text("Temperature: " + response.list[0].main.temp)
+            $(".windResults").text("Wind Speed: " + response.list[0].wind.speed);
+            $(".humidityResults").text("Humidity: " + response.list[0].main.humidity);
+            $(".uvResults").text("Humidity: " + response.list[0].main.humidity);
+            console.log(response.list[0].wind.speed);
+
+            // // Convert the temp to fahrenheit
+            // var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+
+            // // add temp content to html
+            // $(".temp").text("Temperature (K) " + response.main.temp);
+            // $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
+
+            // // Log the data in the console as well
+            // console.log("Wind Speed: " + response.wind.speed);
+            // console.log("Humidity: " + response.main.humidity);
+            // console.log("Temperature (F): " + tempF);
         });
+        // city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
     </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 
