@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Weather or Not</span>
-      </nav>
+    </nav>
 
     <div class="container input-group mb-3">
         <input type="text" class="form-control" placeholder="Enter name of City" aria-label="Enter name of City"
@@ -24,19 +24,23 @@
         </div>
     </div>
     <div class="container card" style="width: 100%;">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
+            <img src="http://openweathermap.org/img/wn/10d.png" class="" alt="weather icon">
+            <h2 class="card-title"></h2>
+            <section class="card-text">
+                <p class="tempResults"></p>
+                <p class="windResults"></p>
+                <p class="humidityResults"></p>
+                <p class="uvResults"></p>
+            </section>
         </div>
     </div>
-    <div class="container row">
+    <div class="container row justify-content-md-center">
         <div class="col">
-            <div class="card" style="width: 100%;">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
+                    <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
                         <p class="windResults"></p>
@@ -47,33 +51,58 @@
             </div>
         </div>
         <div class="col">
-            <div class="card" style="width: 100%;">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-
-                    </p>
+                    <img src="http://openweathermap.org/img/wn/10d.png">
+                    <section class="card-text">
+                        <p class="tempResults"></p>
+                        <p class="windResults"></p>
+                        <p class="humidityResults"></p>
+                        <p class="uvResults"></p>
+                    </section>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card" style="width: 100%">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <img src="http://openweathermap.org/img/wn/10d.png">
+                    <section class="card-text">
+                        <p class="tempResults"></p>
+                        <p class="windResults"></p>
+                        <p class="humidityResults"></p>
+                        <p class="uvResults"></p>
+                    </section>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card" style="width: 100%">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <img src="http://openweathermap.org/img/wn/10d.png">
+                    <section class="card-text">
+                        <p class="tempResults"></p>
+                        <p class="windResults"></p>
+                        <p class="humidityResults"></p>
+                        <p class="uvResults"></p>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <img src="http://openweathermap.org/img/wn/10d.png">
+                    <section class="card-text">
+                        <p class="tempResults"></p>
+                        <p class="windResults"></p>
+                        <p class="humidityResults"></p>
+                        <p class="uvResults"></p>
+                    </section>
                 </div>
             </div>
         </div>
@@ -88,7 +117,7 @@
         var title = "tucson";
         var apikey = "&appid=328fc5d128b7cf0dfe738cf9372e58b1";
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + title + apikey;
-        var queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon};
+
 
         $.ajax({
             url: queryURL,
@@ -96,29 +125,37 @@
         }).then(function (response) {
             console.log(response);
 
+            var tempF = (response.list[0].main.temp - 273.15) * 1.80 + 32;
+
+            // for (i=0; i<)
 
 
-            // Transfer content to HTML
-            $(".card-title").html("<h5>" + response.city.name + " Weather Details</h5>");
-            $(".tempResults").text("Temperature: " + response.list[0].main.temp)
-            $(".windResults").text("Wind Speed: " + response.list[0].wind.speed);
-            $(".humidityResults").text("Humidity: " + response.list[0].main.humidity);
-            $(".uvResults").text("Humidity: " + response.list[0].main.humidity);
-            console.log(response.list[0].wind.speed);
 
-            // // Convert the temp to fahrenheit
-            // var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+            $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
+            $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
+            $(".windResults").text("Wind Speed: " + response.list[0].wind.speed + " mph");
+            $(".humidityResults").text("Humidity: " + response.list[0].main.humidity + "%");
 
-            // // add temp content to html
-            // $(".temp").text("Temperature (K) " + response.main.temp);
-            // $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
 
-            // // Log the data in the console as well
-            // console.log("Wind Speed: " + response.wind.speed);
-            // console.log("Humidity: " + response.main.humidity);
-            // console.log("Temperature (F): " + tempF);
+            var lat = response.city.coord.lat;
+            var lon = response.city.coord.lon;
+            var apiKey = "328fc5d128b7cf0dfe738cf9372e58b1"
+            var latLon = "&lat=" + lat + "&lon=" + lon;
+            var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + latLon;
+
+
+            // $.ajax({
+            //     url: queryURL2,
+            //     method: "GET"
+            // }).then(function (response) {
+            //     console.log(response);
+
+            //     $(".uvResults").text("UV Index: " + response);
+
+
+            // })
         });
-        // city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
