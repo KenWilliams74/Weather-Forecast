@@ -15,31 +15,31 @@
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Weather or Not</span>
     </nav>
-
-    <div class="container input-group mb-3">
+</br>
+    <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Enter name of City" aria-label="Enter name of City"
             aria-describedby="button-addon2">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
         </div>
     </div>
-    <div class="container card" style="width: 100%;">
-        <div class="card-body">
-            <h2 class="card-title"></h2>
-            <img src="http://openweathermap.org/img/wn/10d.png">
-            <section class="card-text main-day">
-                <p class="tempResults"></p>
-                <p class="windResults"></p>
-                <p class="humidityResults"></p>
-                <p class="uvResults"></p>
-            </section>
-        </div>
-    </div>
     <div class="container row justify-content-md-center">
+        <div class="container card" style="width: 100%;">
+            <div class="card-body">
+                <h2 class="card-title"></h2>
+                <img src="http://openweathermap.org/img/wn/10d.png">
+                <section class="card-text main-day">
+                    <p class="tempResults"></p>
+                    <p class="windResults"></p>
+                    <p class="humidityResults"></p>
+                    <p class="uvResults"></p>
+                </section>
+            </div>
+        </div>
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h4 id="date1">Date</h4>
                     <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
@@ -53,7 +53,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h4 id="date2">Date</h4>
                     <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
@@ -67,7 +67,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h4 id="date3">Date</h4>
                     <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
@@ -81,7 +81,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h4 id="date4">Date</h4>
                     <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
@@ -95,7 +95,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h4 id="date5">Date</h4>
                     <img src="http://openweathermap.org/img/wn/10d.png">
                     <section class="card-text">
                         <p class="tempResults"></p>
@@ -125,22 +125,57 @@
         }).then(function (response) {
             console.log(response);
 
-            var tempF = (response.list[0].main.temp - 273.15) * 1.80 + 32;
+            
 
-            for (i = 0; i < response.list.length; i=i+8){
-                var date = response.list[i].dt_txt
-                console.log(date)
-                // $('#target').append($('<div/>', { id: 'r' + i, 'class' : 'ansbox'}))
+            for (i = 0; i < response.list.length; i = i + 8) {
+                var date = response.list[i].dt_txt;
+                console.log(date);
+                var newDate = new Date(date);
+                console.log(newDate);
+
+                var tempF = (response.list[i].main.temp - 273.15) * 1.80 + 32;
+                $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
+                $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
+                $(".windResults").text("Wind Speed: " + response.list[i].wind.speed + " mph");
+                $(".humidityResults").text("Humidity: " + response.list[i].main.humidity + "%");
+
+                // var div1 = $("<div>").addClass("container card");
+                // console.log(div1);
+                // var div2 = $("<div>").addClass("card-body");
+                // console.log(div2);
+                // var div3 = $("<h2>").addClass("card-title");
+                // console.log(div3);
+                // var div4 = $("<img>").attr("src", "http://openweathermap.org/img/wn/10d.png");
+                // var div5 = $("<section>").addClass("card-text");
+                // var div6 = $("<p>");
+                
+                // $(".container").append(div1);
+                
+
+        //         <div class="container row justify-content-md-center">
+        //              <div class="container card" style="width: 100%;">
+        //                  <div class="card-body">
+        //                      <h2 class="card-title"></h2>
+        //                      <img src="http://openweathermap.org/img/wn/10d.png">
+        //                      <section class="card-text main-day">
+        //                      <p class="tempResults"></p>
+        //                      <p class="windResults"></p>
+        //                      <p class="humidityResults"></p>
+        //                      <p class="uvResults"></p>
+        //                      </section>
+        //                  </div>
+        //              </div>
+        //          </div>
 
 
             }
 
-            
 
-            $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
-            $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
-            $(".windResults").text("Wind Speed: " + response.list[0].wind.speed + " mph");
-            $(".humidityResults").text("Humidity: " + response.list[0].main.humidity + "%");
+
+            // $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
+            // $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
+            // $(".windResults").text("Wind Speed: " + response.list[0].wind.speed + " mph");
+            // $(".humidityResults").text("Humidity: " + response.list[0].main.humidity + "%");
 
 
             var lat = response.city.coord.lat;
