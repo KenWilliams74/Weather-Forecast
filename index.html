@@ -25,9 +25,9 @@
     </div>
     <div class="container card" style="width: 100%;">
         <div class="card-body">
-            <img src="http://openweathermap.org/img/wn/10d.png" class="" alt="weather icon">
             <h2 class="card-title"></h2>
-            <section class="card-text">
+            <img src="http://openweathermap.org/img/wn/10d.png">
+            <section class="card-text main-day">
                 <p class="tempResults"></p>
                 <p class="windResults"></p>
                 <p class="humidityResults"></p>
@@ -127,9 +127,15 @@
 
             var tempF = (response.list[0].main.temp - 273.15) * 1.80 + 32;
 
-            // for (i=0; i<)
+            for (i = 0; i < response.list.length; i=i+8){
+                var date = response.list[i].dt_txt
+                console.log(date)
+                // $('#target').append($('<div/>', { id: 'r' + i, 'class' : 'ansbox'}))
 
 
+            }
+
+            
 
             $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
             $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
