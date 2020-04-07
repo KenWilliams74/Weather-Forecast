@@ -8,6 +8,7 @@ $(document).ready(function () {
             }
             event.stopPropagation();
         });
+        
         $("#search-value").val("");
 
         searchWeather(searchValue);
@@ -36,7 +37,7 @@ $(document).ready(function () {
                 }
 
                 $("#today").empty();
-                console.log(data)
+              
                 for (i = 0; i < data.list.length; i = i + 8) {
                     var tempF = (data.list[i].main.temp - 273.15) * 1.80 + 32;
                     var title = $("<h3>").addClass("card-title").text(data.city.name + " (" + new Date().toLocaleDateString() + ")");
