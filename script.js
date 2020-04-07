@@ -1,7 +1,13 @@
 $(document).ready(function () {
     $("#search-button").on("click", function () {
         var searchValue = $("#search-value").val();
-
+        $("#search-value").keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == "13"){
+                $("#search-button").click();  
+            }
+            event.stopPropagation();
+        });
         $("#search-value").val("");
 
         searchWeather(searchValue);
@@ -59,13 +65,13 @@ $(document).ready(function () {
             url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=328fc5d128b7cf0dfe738cf9372e58b1",
             dataType: "json",
             success: function (data) {
-            
+
                 $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
 
                 for (var i = 0; i < data.list.length; i++) {
-                    
+
                     if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-            
+
                         var col = $("<div>").addClass("col-md-2");
                         var card = $("<div>").addClass("card bg-primary text-white");
                         var body = $("<div>").addClass("card-body p-2");
