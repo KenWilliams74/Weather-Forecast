@@ -11,193 +11,30 @@
 </head>
 
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Weather or Not</span>
     </nav>
-</br>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Enter name of City" aria-label="Enter name of City"
-            aria-describedby="button-addon2">
+    </br>
+    <div class="input-group mb-3 container-fluid">
+        <input type="text" class="form-control" id="search-value" placeholder="Enter name of City"
+            aria-label="Enter name of City" aria-describedby="button-addon2">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-        </div>
-    </div>
-    <div class="container row justify-content-md-center">
-        <div class="container card" style="width: 100%;">
-            <div class="card-body">
-                <h2 class="card-title"></h2>
-                <img src="http://openweathermap.org/img/wn/10d.png">
-                <section class="card-text main-day">
-                    <p class="tempResults"></p>
-                    <p class="windResults"></p>
-                    <p class="humidityResults"></p>
-                    <p class="uvResults"></p>
-                </section>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 id="date1">Date</h4>
-                    <img src="http://openweathermap.org/img/wn/10d.png">
-                    <section class="card-text">
-                        <p class="tempResults"></p>
-                        <p class="windResults"></p>
-                        <p class="humidityResults"></p>
-                        <p class="uvResults"></p>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 id="date2">Date</h4>
-                    <img src="http://openweathermap.org/img/wn/10d.png">
-                    <section class="card-text">
-                        <p class="tempResults"></p>
-                        <p class="windResults"></p>
-                        <p class="humidityResults"></p>
-                        <p class="uvResults"></p>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 id="date3">Date</h4>
-                    <img src="http://openweathermap.org/img/wn/10d.png">
-                    <section class="card-text">
-                        <p class="tempResults"></p>
-                        <p class="windResults"></p>
-                        <p class="humidityResults"></p>
-                        <p class="uvResults"></p>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 id="date4">Date</h4>
-                    <img src="http://openweathermap.org/img/wn/10d.png">
-                    <section class="card-text">
-                        <p class="tempResults"></p>
-                        <p class="windResults"></p>
-                        <p class="humidityResults"></p>
-                        <p class="uvResults"></p>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 id="date5">Date</h4>
-                    <img src="http://openweathermap.org/img/wn/10d.png">
-                    <section class="card-text">
-                        <p class="tempResults"></p>
-                        <p class="windResults"></p>
-                        <p class="humidityResults"></p>
-                        <p class="uvResults"></p>
-                    </section>
-                </div>
-            </div>
+            <button class="btn btn-outline-secondary" type="button" id="search-button"><i
+                    class="fa fa-search"></i>Submit</button>
         </div>
     </div>
 
+    <div class="row">
+        <div>
+            <ul class="list-group history"></ul>
+        </div>
 
+        <div class="col-lg-9">
+            <div id="today" class="mt-3"></div>
+            <div id="forecast" class="mt-3"></div>
+        </div>
+    </div>
 
-
-
-
-    <script>
-        var title = "tucson";
-        var apikey = "&appid=328fc5d128b7cf0dfe738cf9372e58b1";
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + title + apikey;
-
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
-
-            
-
-            for (i = 0; i < response.list.length; i = i + 8) {
-                var date = response.list[i].dt_txt;
-                console.log(date);
-                var newDate = new Date(date);
-                console.log(newDate);
-
-                var tempF = (response.list[i].main.temp - 273.15) * 1.80 + 32;
-                $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
-                $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
-                $(".windResults").text("Wind Speed: " + response.list[i].wind.speed + " mph");
-                $(".humidityResults").text("Humidity: " + response.list[i].main.humidity + "%");
-
-                // var div1 = $("<div>").addClass("container card");
-                // console.log(div1);
-                // var div2 = $("<div>").addClass("card-body");
-                // console.log(div2);
-                // var div3 = $("<h2>").addClass("card-title");
-                // console.log(div3);
-                // var div4 = $("<img>").attr("src", "http://openweathermap.org/img/wn/10d.png");
-                // var div5 = $("<section>").addClass("card-text");
-                // var div6 = $("<p>");
-                
-                // $(".container").append(div1);
-                
-
-        //         <div class="container row justify-content-md-center">
-        //              <div class="container card" style="width: 100%;">
-        //                  <div class="card-body">
-        //                      <h2 class="card-title"></h2>
-        //                      <img src="http://openweathermap.org/img/wn/10d.png">
-        //                      <section class="card-text main-day">
-        //                      <p class="tempResults"></p>
-        //                      <p class="windResults"></p>
-        //                      <p class="humidityResults"></p>
-        //                      <p class="uvResults"></p>
-        //                      </section>
-        //                  </div>
-        //              </div>
-        //          </div>
-
-
-            }
-
-
-
-            // $(".card-title").html("<h2>" + response.city.name + " Weather </h2>");
-            // $(".tempResults").text("Temperature: " + tempF.toFixed(0) + "°F");
-            // $(".windResults").text("Wind Speed: " + response.list[0].wind.speed + " mph");
-            // $(".humidityResults").text("Humidity: " + response.list[0].main.humidity + "%");
-
-
-            var lat = response.city.coord.lat;
-            var lon = response.city.coord.lon;
-            var apiKey = "328fc5d128b7cf0dfe738cf9372e58b1"
-            var latLon = "&lat=" + lat + "&lon=" + lon;
-            var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + latLon;
-
-
-            // $.ajax({
-            //     url: queryURL2,
-            //     method: "GET"
-            // }).then(function (response) {
-            //     console.log(response);
-
-            //     $(".uvResults").text("UV Index: " + response);
-
-
-            // })
-        });
-
-    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -207,6 +44,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 
