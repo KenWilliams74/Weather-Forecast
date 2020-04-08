@@ -80,8 +80,8 @@ $(document).ready(function () {
                         var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
 
                         var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-
-                        var p1 = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
+                        var tempF = (data.list[i].main.temp - 273.15) * 1.80 + 32;
+                        var p1 = $("<p>").addClass("card-text").text("Temp: " + tempF.toFixed(0) + " °F");
                         var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
 
                         col.append(card.append(body.append(title, img, p1, p2)));
